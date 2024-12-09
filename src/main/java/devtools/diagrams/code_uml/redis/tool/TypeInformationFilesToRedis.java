@@ -20,7 +20,7 @@ public class TypeInformationFilesToRedis {
     @Autowired
     TypeInformationRedisRepository redisRepository;
 
-    private String sourcFilesPath = "C:\\apidocs-json\\docs";
+    private final String sourcFilesPath = "C:\\apidocs-json\\docs";
 
     public void sendFilesToRedis() {
         File file = new File(sourcFilesPath);

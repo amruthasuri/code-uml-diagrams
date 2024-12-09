@@ -1,5 +1,7 @@
 package devtools.diagrams.code_uml;
 
+import devtools.diagrams.code_uml.json.tool.TypeDocInformationJSONReader;
+import devtools.diagrams.code_uml.redis.repository.TypeInformationRedisRepository;
 import devtools.diagrams.code_uml.redis.tool.TypeInformationFilesToRedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,8 +16,13 @@ public class CodeUmlApplication implements CommandLineRunner {
 	TypeInformationFilesToRedis toolTypeInformationFilesToRedis;
 
 	@Autowired
-	public CodeUmlApplication(TypeInformationFilesToRedis toolTypeInformationFilesToRedis) {
+	TypeDocInformationJSONReader toolSuperTypeInformationToRedis;
+	
+	@Autowired
+	public CodeUmlApplication(TypeInformationFilesToRedis toolTypeInformationFilesToRedis, 
+			TypeDocInformationJSONReader toolSuperTypeInformationToRedis) {
 		this.toolTypeInformationFilesToRedis =  toolTypeInformationFilesToRedis;
+		this.toolSuperTypeInformationToRedis = toolSuperTypeInformationToRedis;
 	}
 
 	public static void main(String[] args) {
@@ -25,6 +32,7 @@ public class CodeUmlApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("Running the CommandLiner -------------------------------------------------");
-		toolTypeInformationFilesToRedis.sendFilesToRedis();
+		// toolTypeInformationFilesToRedis.sendFilesToRedis();
+		toolSuperTypeInformationToRedis.sendSuperTypeInformationToRedis();
 	}
 }
